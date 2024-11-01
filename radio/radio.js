@@ -50,3 +50,26 @@ function volumef(){
     }
     
 }
+
+//Fetches the live txt
+
+async function fetchLiveText(){
+    const livetext = document.getElementById("livetxt"); //The text object in your html 
+    let url = "https://radiozu.ro/trackid/radiozu-live.txt"; //the radio station you want to get the url
+    try{
+        const response = await fetch(url);
+
+        if(!response.ok){
+            throw new Error("Could not fetch data");
+        }
+         
+        const data = await response.text()
+        livetext.innerHTML = data;
+    }
+    catch(error){
+        console.error(error);
+    }
+}
+
+
+setInterval(fetchLiveText, 15000);  
